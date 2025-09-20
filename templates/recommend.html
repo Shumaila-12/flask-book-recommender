@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Recommender – Recommendations</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #f8f9fa;
+    }
+    .navbar {
+      background-color: #00a65a;
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .card {
+      background-color: #1e1e1e;
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.2s;
+      color: #fff;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    img {
+      max-height: 200px;
+      object-fit: cover;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+    }
+    .btn-custom {
+      background-color: #00a65a;
+      color: #fff;
+      border-radius: 30px;
+    }
+    .btn-custom:hover {
+      background-color: #00914d;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="/">📚 My Book Recommender</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recommend">Recommend</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="text-center my-5">
+  <h1 class="display-5 fw-bold">Find Similar Books</h1>
+  <p class="lead">Enter a book name to get recommendations</p>
+</header>
+
+<!-- Search Form -->
+<div class="container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form action="/recommend_books" method="post" class="input-group">
+        <input name="user_input" type="text" class="form-control form-control-lg" placeholder="Type book name here..." required>
+        <button type="submit" class="btn btn-custom btn-lg">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Recommendations Grid -->
+<div class="container">
+  <div class="row">
+    {% if data %}
+      {% for i in data %}
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card h-100 text-center p-3">
+            <img src="{{ i[2] }}" class="card-img-top mb-3" alt="{{ i[0] }}">
+            <h5 class="card-title">{{ i[0] }}</h5>
+           <p><strong>Author:</strong> {{ i[1] }}</p>
+
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
